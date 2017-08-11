@@ -13,7 +13,7 @@ int * getIndexes(int * nums, int len, int target){
 		}
 		candidate = nums[i];
 		complement = target - candidate;
-		for(j= 1+1; j < len; j++){
+		for(j= i+1; j < len; j++){
 			if(nums[j] == complement)
 				break;
 		}
@@ -32,7 +32,7 @@ int main(){
 	int len = 4;
 	int *result = getIndexes(nums, len, target);
 	
-	if(nums != NULL && (nums[result[0]] + nums[result[1]] == target)){
+	if(result != NULL && (nums[result[0]] + nums[result[1]] == target)){
 		printf("Nice Job! \n");
 	}else{
 		printf("Upps :( \n");
