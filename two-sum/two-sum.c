@@ -9,9 +9,9 @@ int * getIndexes(int * nums, int len, int target){
 	int *result = (int *)calloc(2, sizeof(int));
 
 	for(i=0;i<len - 1 ; i++){
-		if(nums[i] >= target){
-			continue;
-		}
+		// if(nums[i] >= target){
+		// 	continue;
+		// }
 		candidate = nums[i];
 		complement = target - candidate;
 		for(j= i+1; j < len; j++){
