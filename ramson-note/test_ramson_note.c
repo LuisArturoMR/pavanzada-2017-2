@@ -27,10 +27,7 @@ static char * testUnit() {
   magazine = magazineContent;
 
 
-
   int result = compareString(magazine, noteContent);
-
-  printf("Resultado: %d\n", result );
 
   /*Return the number of words founded, if it's equal
   of the words given pass the test*/
