@@ -18,19 +18,25 @@
 */
 
 int beHappy(int number){
+  printf("Number to separate: %d\n",number );
   int sum = 0;
   while (number > 0 && sum != 1) {
     if (sum == number)
       return 0;
 
     int digit = number % 10;
+    printf("New Digit: %d\n",digit );
     sum = sum + pow(digit,2);
+    printf("Sum: %d\n", sum);
     number /= 10;
+    printf("Next digit: %d\n",number );
   }
 
   if (sum == 1 && number == 0) {
+    printf("It's a HappyNumber\n");
     return sum;
   }else{
+    printf("Check if the new number is Happy: %d\n",sum );
     beHappy(sum);
   }
 
