@@ -94,6 +94,9 @@ void * getDictionary(Dict *dictionary,char *key,int size, int *errorCode) {
     }
 
     int index = hash(key, dictionary->size);
+    if (dictionary->elements[index].key == 0) {
+      return NULL;
+    }
     void *result = malloc(size);
     if(result == NULL){
         *errorCode = 100;

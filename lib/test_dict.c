@@ -53,11 +53,25 @@ static char * testGetDictionary() {
   return 0;
 }
 
+static char * testGetDictionaryNull() {
+  unsigned int size = 100;
+  int errorCode;
+  Dict *myDictionary = initDictionary(size, &errorCode);
+  int value = 1;
+  upsertDictionary(myDictionary, "uno",(void *) &value, sizeof(int), &errorCode);
+  void *result = getDictionary(myDictionary, "dos", sizeof(int),&errorCode);
+  value = 27;
+  muAssert("myDictionary errorCode must be 0", errorCode == 0);
+  muAssert("Result must be equal to null", result == NULL); // el contenido de esta dirección que es de valor entero sea igual a value
+  return 0;
+}
+
 static char * allTests() {
 
   muRunTest(testInitDictionary);
   muRunTest(testUpsertDictionary);
   muRunTest(testGetDictionary);
+  muRunTest(testGetDictionaryNull);
 
   return 0;
 }
@@ -81,3 +95,5 @@ int main(int argc, char **argv) {
   printf("Tests run: %d\n", testsRun);
   return result != 0;
 }
+
+//gcc -c -o dict.o dict.c
