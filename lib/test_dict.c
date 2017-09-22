@@ -31,7 +31,7 @@ static char * testUpsertDictionary() {
   int errorCode;
   Dict *myDictionary = initDictionary(size, &errorCode);
   int value = 1;
-  upsertDictionary(myDictionary, "uno",(void *) &value, &errorCode);
+  upsertDictionary(myDictionary, "uno",(void *) &value, sizeof(int), &errorCode);
 
   muAssert("myDictionary errorCode must be 0", errorCode == 0);
   muAssert("myDictionary errorCode must be 0", strcmp(myDictionary->elements[0].key, "uno") == 0);
@@ -39,10 +39,26 @@ static char * testUpsertDictionary() {
   return 0;
 }
 
+static char * testGetDictionary() {
+
+  unsigned int size = 1;
+  int errorCode;
+  Dict *myDictionary = initDictionary(size, &errorCode);
+  int value = 1;
+  upsertDictionary(myDictionary, "uno",(void *) &value, sizeof(int), &errorCode);
+  void *result = getDictionary(myDictionary, "uno", sizeof(int),&errorCode);
+  // value = 2;
+  muAssert("myDictionary errorCode must be 0", errorCode == 0);
+  muAssert("myDictionary errorCode must be 0", *((int *)result) == value); // el contenido de esta dirección que es de valor entero sea igual a value
+  return 0;
+}
+
 static char * allTests() {
 
   muRunTest(testInitDictionary);
   muRunTest(testUpsertDictionary);
+  muRunTest(testGetDictionary);
+
   return 0;
 }
 
