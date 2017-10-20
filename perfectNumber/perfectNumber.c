@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "perfectNumber.h"
 
-#define printDebug(msg) do{ char *value = getenv("OPER_DEBUG");if( !strcmp(value,"t")) printf("%s",msg);}while(0)
 
 /****************
   * isPerfect
@@ -21,9 +20,8 @@ int isPerfect(int number){
         }
         int sum = 0;
         for (int i = 1; i < number; i++) {
-          sprintf(message,"number = %d \n",number);
-          printDebug(message);
             if (number % i == 0) { //Only integer divisors
+              printf("divisor = %d \n",sum);
                 sum += i;
             }
         }
