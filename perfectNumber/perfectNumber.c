@@ -21,8 +21,8 @@ int isPerfect(int number){
         int sum = 0;
         for (int i = 1; i < number; i++) {
             if (number % i == 0) { //Only integer divisors
-              printf("divisor = %d \n",sum);
                 sum += i;
+                printf("divisor = %d \n",i);
             }
         }
         return sum == number; //if number is Perfect sum == 1 else it will be false
