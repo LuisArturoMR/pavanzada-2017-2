@@ -1,15 +1,26 @@
 #include <pthread.h>
 #include <stdio.h>
-#define NUM_THREADS     100
+#include <unistd.h>
+#include <stdlib.h>
+#include <semaphore.h>
+
+#define NUM_THREADS 10
 
 unsigned int total;
+sem_t sem1;
 
 void *add100(void *threadid)
 {
   long tid;
+  unsigned int localTotal;
   tid = (long)threadid;
   printf("Adding 100 #%ld!\n", tid);
-  total += 100;
+  sem_wait(&sem1);
+  localTotal = total;
+  localTotal +=100;
+  // sleep(tid%3);
+  total = localTotal;
+  sem_post(&sem1);
   pthread_exit(NULL);
 }
 
@@ -19,6 +30,7 @@ int main (int argc, char *argv[])
   int rc;
   long t;
   total = 0;
+  sem_init(&sem1,0,1);
   printf("Initial Total = %d\n", total);
   for(t=0; t<NUM_THREADS; t++){
      printf("In main: creating thread %ld\n", t);
