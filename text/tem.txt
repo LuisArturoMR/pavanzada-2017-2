@@ -1,0 +1,6 @@
+temp 24
+temp 23
+temp 49
+temp 50
+temp 60
+temp 10
